@@ -2,43 +2,78 @@
   <div class="cindex-container">
     <h1>豆瓣最受欢迎的影评</h1>
     <div class="cindex-container-first">
-    <ul class="cindex-container-ul">
-      <li class=container-first-li>
-        <span>最受欢迎的</span>
+      <ul class="cindex-container-ul">
+        <li class=container-first-li>
+          <span>最受欢迎的</span>
         </li>
         <li class=container-second-li>
-        <a href="#"><span>/ 新片评论</span></a>
+          <a href="#"><span>/ 新片评论</span></a>
         </li>
-    </ul>
-   </div>
-    <div class="main-reviem-item">
-      <a class="subject-img" href="">                    <img alt="初恋这件小事"  title="初恋这件小事" src="https://img3.doubanio.com/view/photo/s_ratio_poster/public/p1505312273.webp"></a>
-    <div class="main-hd">
-        <a href="" class="avator">
-            <img  width="24" height="24" src="https://img3.doubanio.com/icon/u132758789-6.jpg">
-        </a>
-        <a href="" class="name1">男神的炎迪迪</a>
-         <span title="力荐">
-           <el-rate
-            v-model="value"
-            disabled        
-            text-color="#ff9900"
-            score-template="{value}"
-            >
-            </el-rate>
-          </span>
-        <span class="main-meta">2018-08-15 10:30:04</span>
+      </ul>
     </div>
+    <!-- 第二部分 -->
+    <div class="main-reviem-item" v-for="(data,i) of dates" :key="i" :data-index="i">
+    <!-- 图片 -->
+      <a class="subject-img" href="">                   
+        <img  :title="data.mname" :src="data.src">
+      </a>
+      <!-- 基本信息 -->
+        <div class="main-hd">
+          <!-- 头像 -->
+          <a href="" class="avator">
+            <img  width="24" height="24" :src="data.utuo">
+          </a>
+          <!-- 用户昵称 -->
+          <a href="" class="name1">{{data.uname}}</a>
+          <!-- 评分 -->
+          <span title="力荐">
 
-    <div class="main-bd">
-   <h2>
-    <a href="#" class="name1">深藏于心的那份青涩</a>
-    </h2>
-    <div class="short-content">
-        <p class="spoiler-tip">这篇影评可能有剧透</p>
-          学长他就像我生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力， 其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会把它再刷一遍，遍遍的感触都不同，就像那个她永远在我心裡，但却越来越模糊。 校园+淡淡初恋+死党...
-          &nbsp;(<a href="javascript:;" class="name1 name-title" title="展开">展开</a>)
+          </span>
+          <!-- 评论时间 -->
+          <span class="main-meta">{{data.ptime}}</span>
+        </div>
+        <!-- 内容部分 -->
+        <div class="main-bd">
+        <!-- 标题 -->
+          <h2>
+            <a href="#" class="name1" >深藏于心的那份青涩</a>
+          </h2>
+          <!-- 评论 -->
+          <div class="short-content">
+            <p class="spoiler-tip" v-for="(txt,i) of data.msg" :key="i" v-if="show">
+              {{txt}}
+            </p>
+            <div v-if="show">(<a href="javascript:;" class="name1 name-title" title="展开"  v-on:click="show = !show">展开</a>)
+            </div>
+            <!-- 新页面 -->
+            <div  v-if="!show" >
+              <h2>
+                <a href="#" class="name1" >深藏于心的那份青涩</a>
+              </h2>
+              <p class="spoiler-tip" v-for="(txt,i) of data.msg" :key="i" v-if="show">       
+              </p>
+              <div >
+                (<a href="javascript:;" class="name1 name-title" title="收起"   v-on:click="show = !show">收起</a>)
+              </div>
+            </div>  
           </div>
+       
+            <!-- 
+            <div  v-if="!show"> -->
+          <!-- <h2>
+            <a href="#" class="name1" >深藏于心的那份青涩</a>
+          </h2> -->
+          <!-- <p class="spoiler-tip">
+              生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力， 其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会把它再刷一遍，遍遍的感触都不同，就像那个她永远在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透
+            
+              学长他就像我生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力， 其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会把它再刷一遍，遍遍的感触都不同，就像那个她永远在我心裡，但却越来越模糊。 校园+淡淡初恋+死党...
+              &nbsp;
+          </p> -->
+          <!-- <div>(
+            <a href="javascript:;" class="name1 name-title" title="收起"   v-on:click="show = !show">收起</a>
+            )
+          </div> -->
+        </div>
       </div>
     </div>
   </div>
@@ -47,12 +82,77 @@
 export default {
   data() {
     return {
-      value:5
-    };
+      show:true,
+      dates:[
+        {
+          mname:"初恋这件小事",
+          src:"https://img3.doubanio.com/view/photo/s_ratio_poster/public/p1505312273.webp",
+          uname:"男神的眼",
+          utuo:"https://img3.doubanio.com/icon/u132758789-6.jpg",
+          value:5,
+          ptime:"2018-08-15 10:30:04",
+          msg:[
+            "生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力， 其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会把它再刷一遍，遍遍的感触都不同，就像那个她永远在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透",
+            "生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力， 其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会把它再刷一遍，遍遍的感触都不同，就像那个她永远在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透,"
+          ]
+        },
+        {
+          mname:"rangzidanfei",
+          src:"https://img3.doubanio.com/view/photo/s_ratio_poster/public/p1505312273.webp",
+          uname:"男神的眼",
+          utuo:"https://img3.doubanio.com/icon/u132758789-6.jpg",
+          value:5,
+          ptime:"2018-08-15 10:30:04",
+          msg:[
+            "生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力， 其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会把它再刷一遍，遍遍的感触都不同，就像那个她永远在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透",
+            "生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力， 其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会把它再刷一遍，遍遍的感触都不同，就像那个她永远在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透,"
+          ]
+        },
+        {
+          mname:"初恋这件小事",
+          src:"https://img3.doubanio.com/view/photo/s_ratio_poster/public/p1505312273.webp",
+          uname:"男神的眼",
+          utuo:"https://img3.doubanio.com/icon/u132758789-6.jpg",
+          value:5,
+          ptime:"2018-08-15 10:30:04",
+          msg:[
+            "生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力， 其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会把它再刷一遍，遍遍的感触都不同，就像那个她永远在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透",
+            "生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力， 其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会把它再刷一遍，遍遍的感触都不同，就像那个她永远在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透,"
+          ]
+        },
+        {
+          mname:"rangzidanfei",
+          src:"https://img3.doubanio.com/view/photo/s_ratio_poster/public/p1505312273.webp",
+          uname:"男神的眼",
+          utuo:"https://img3.doubanio.com/icon/u132758789-6.jpg",
+          value:5,
+          ptime:"2018-08-15 10:30:04",
+          msg:[
+            "生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力， 其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会把它再刷一遍，遍遍的感触都不同，就像那个她永远在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透",
+            "生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力， 其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会把它再刷一遍，遍遍的感触都不同，就像那个她永远在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透,"
+          ]
+        },
+      ]
+    }
+  },
+  methods:{
+    clcik(event){
+  
+  e.stopPropagation();
+    }
+
   }
+
 }
 </script>
 <style scoped>
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
   .cindex-container{
     width:820px;
     margin:auto;
@@ -61,7 +161,6 @@ export default {
     }
   .cindex-container-first{
     margin-bottom:60px;
-
     }
   .cindex-container>h1{
     color:#494949;
@@ -70,7 +169,6 @@ export default {
   .cindex-container-ul{
      float: left;
      list-style-type: none;
-
   }
   .cindex-container-ul>li{
     float: left;
@@ -170,7 +268,6 @@ export default {
 .name-title{
   color: #37a;
 }
-
 </style>
 
 
@@ -189,5 +286,4 @@ export default {
     height:11px !important;
     vertical-align:middle !important;
   } 
-
 </style>
