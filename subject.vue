@@ -146,37 +146,235 @@
                         </el-col>
                     </el-row>
                 </div>
-                <!-- 想看 看过 评价星星 -->
+                <!-- 想看 看过 评价星星 写短评 影评  剧情简介 演员表 视频 图片-->
                 <div id="interest_sect_level" class="clearfix">
-                    <!-- 组件 想看看过 -->
-                    <el-row>
-                        <el-button type="danger" plain size="mini">
-                            <a href="https://www.douban.com/reason=collectwish&amp;ck=" class="a_show_login colbutt ll">
-                                <span>想看</span>
-                            </a>
-                        </el-button>                                   
-                        <el-button type="danger" plain size="mini">
-                            <a href="https://www.douban.com/reason=collectcollect&amp;ck=" class="a_show_login colbutt ll">
-                                <span>看过</span>
-                            </a>
-                        </el-button>
-                    </el-row>
-                    <!-- 评价星星 -->
-                    <div class="a_stars">
-                        <span class="rating">评价：</span>
-                        <el-rate v-model="value2" show-text>
-                        </el-rate>
+                        <!-- 想看看过评价星星 -->
+                    <div>
+                        <div v-show="read">
+                            <!-- 想看看过 -->
+                            <div>
+                                <div>
+                                    <button data-target="#mymodal" data-toggle="modal" class="btn btn-danger btn-sm">想看</button>
+                                    <div id="mymodal" class="modal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4>添加收藏：我想看这部电影</h4>
+                                                    <button data-dismiss="modal" class="close" @click="clear1">&times;</button>
+                                                </div>
+                                                <div>
+                                                    <div class="modal-body">
+                                                        <div>标签(多个标签用空格分隔):</div>
+                                                        <input v-model="a" type="text"/>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <span>常用标签：</span>
+                                                        <div @click="msg">
+                                                            <button type="button" class="btn btn-success btn-xs" >爱情</button>
+                                                            <button type="button" class="btn btn-success btn-xs">初恋</button>
+                                                            <button type="button" class="btn btn-success btn-xs">青春</button>
+                                                            <button type="button" class="btn btn-success btn-xs">2010</button>
+                                                            <button type="button" class="btn btn-success btn-xs">成长</button>
+                                                            <button type="button" class="btn btn-success btn-xs">少年</button>
+                                                            <button type="button" class="btn btn-success btn-xs">泰国</button>
+                                                            <button type="button" class="btn btn-success btn-xs">校园</button>
+                                                            <button type="button" class="btn btn-success btn-xs">喜剧</button>
+                                                            <button type="button" class="btn btn-success btn-xs">感人</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div>简短评论:</div>
+                                                        <input type="text" class="p">
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <el-checkbox v-model="checked">仅自己可见</el-checkbox>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <span class="share">
+                                                        <span>分享到</span>
+                                                        <el-checkbox v-model="check1">豆瓣广播</el-checkbox>
+                                                    </span>
+                                                    <button data-dismiss="modal" class="btn btn-default" @click="seen">保存</button>
+                                                    <!-- <button data-dismiss="modal" class="btn btn-danger">关闭</button> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button data-target="#indentifier" data-toggle="modal" class="btn btn-danger btn-sm">看过</button>
+                                    <div id="indentifier" class="modal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4>添加收藏：我看过的这部电影</h4>
+                                                    <button data-dismiss="modal" class="close" @click="clear2">&times;</button>
+                                                </div>
+                                                <div>
+                                                    <div class="modal-body">
+                                                        <div>标签(多个标签用空格分隔):</div>
+                                                        <input v-model="b" type="text"/>
+                                                    </div>
+                                                    <div @click="msg2" class="modal-body">
+                                                        <span>常用标签：</span>
+                                                        <div>
+                                                            <button type="button" class="btn btn-success btn-xs">爱情</button>
+                                                            <button type="button" class="btn btn-success btn-xs">初恋</button>
+                                                            <button type="button" class="btn btn-success btn-xs">青春</button>
+                                                            <button type="button" class="btn btn-success btn-xs">2010</button>
+                                                            <button type="button" class="btn btn-success btn-xs">成长</button>
+                                                            <button type="button" class="btn btn-success btn-xs">少年</button>
+                                                            <button type="button" class="btn btn-success btn-xs">泰国</button>
+                                                            <button type="button" class="btn btn-success btn-xs">校园</button>
+                                                            <button type="button" class="btn btn-success btn-xs">喜剧</button>
+                                                            <button type="button" class="btn btn-success btn-xs">感人</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div>简短评论:</div>
+                                                        <input type="text" class="p">
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <el-checkbox v-model="checked">仅自己可见</el-checkbox>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <span class="share">
+                                                        <span>分享到</span>
+                                                        <el-checkbox v-model="check1">豆瓣广播</el-checkbox>
+                                                    </span>
+                                                    <button data-dismiss="modal" class="btn btn-default" @click="seen2">保存</button>
+                                                    <!-- <button data-dismiss="modal" class="btn btn-danger">关闭</button> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 评价星星 并弹出看过模态框 -->
+                            <div class="a_stars">
+                                <span class="rating">评价：</span>
+                                <el-rate v-model="value2" show-text data-target="#indentifier" data-toggle="modal" class="rating">
+                                </el-rate>
+                                <div id="indentifier" class="modal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4>添加收藏：我看过的这部电影</h4>
+                                                <button data-dismiss="modal" class="close" @click="clear2">&times;</button>
+                                            </div>
+                                            <div>
+                                                <div class="modal-body">
+                                                    <div>标签(多个标签用空格分隔):</div>
+                                                    <input v-model="b" type="text"/>
+                                                </div>
+                                                <div @click="msg2" class="modal-body">
+                                                    <span>常用标签：</span>
+                                                    <div>
+                                                        <button type="button" class="btn btn-success btn-xs">爱情</button>
+                                                        <button type="button" class="btn btn-success btn-xs">初恋</button>
+                                                        <button type="button" class="btn btn-success btn-xs">青春</button>
+                                                        <button type="button" class="btn btn-success btn-xs">2010</button>
+                                                        <button type="button" class="btn btn-success btn-xs">成长</button>
+                                                        <button type="button" class="btn btn-success btn-xs">少年</button>
+                                                        <button type="button" class="btn btn-success btn-xs">泰国</button>
+                                                        <button type="button" class="btn btn-success btn-xs">校园</button>
+                                                        <button type="button" class="btn btn-success btn-xs">喜剧</button>
+                                                        <button type="button" class="btn btn-success btn-xs">感人</button>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div>简短评论:</div>
+                                                    <input type="text" class="p">
+                                                </div>
+                                                <div class="modal-body">
+                                                    <el-checkbox v-model="checked">仅自己可见</el-checkbox>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <span class="share">
+                                                    <span>分享到</span>
+                                                    <el-checkbox v-model="check1">豆瓣广播</el-checkbox>
+                                                </span>
+                                                <button data-dismiss="modal" class="btn btn-default" @click="seen2">保存</button>
+                                                <!-- <button data-dismiss="modal" class="btn btn-danger">关闭</button> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+
+                            </div>
+                            <!-- 点想看保存后显示  -->
+                            <div v-show="readAll">
+                                <span>我想看这部电影</span>
+                                <el-button type="text" @click="open" class="btn btn-muted btn-sm">删除</el-button>
+                            </div>
+                            <!-- 点看过 保存 后显示 -->
+                            <div v-show="readAll2">
+                                <span>我看过这部电影</span>
+                                <el-button type="text" @click="open2" class="btn btn-muted btn-sm">删除</el-button>
+                            </div>
                     </div>
                     <!-- 写短评 写影评 分享到 -->
                     <div class="gtleft">
                         <ul>
-                            <li> 
+                            <!-- 写短评 -->
+                            <li>
                                 <img src="https://img3.doubanio.com/f/shire/cc03d0fcf32b7ce3af7b160a0b85e5e66b47cc42/pics/short-comment.gif" />&nbsp;
-                                <a onclick="moreurl(this, {from:'mv_sbj_wr_cmnt_login'})" class="j a_show_login" href="https://www.douban.com/register?reason=review" rel="nofollow">写短评</a>
+                                <a class="write"  data-target="#mymodal3" data-toggle="modal">写短评</a>
+                                <div id="mymodal3" class="modal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4>添加收藏：写短评</h4>
+                                                <button data-dismiss="modal" class="close" @click="clear1">&times;</button>
+                                            </div>
+                                            <div>
+                                                <div class="modal-body">
+                                                    <div>标签(多个标签用空格分隔):</div>
+                                                    <input v-model="a" type="text"/>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <span>常用标签：</span>
+                                                    <div @click="msg">
+                                                        <button type="button" class="btn btn-success btn-xs" >爱情</button>
+                                                        <button type="button" class="btn btn-success btn-xs">初恋</button>
+                                                        <button type="button" class="btn btn-success btn-xs">青春</button>
+                                                        <button type="button" class="btn btn-success btn-xs">2010</button>
+                                                        <button type="button" class="btn btn-success btn-xs">成长</button>
+                                                        <button type="button" class="btn btn-success btn-xs">少年</button>
+                                                        <button type="button" class="btn btn-success btn-xs">泰国</button>
+                                                        <button type="button" class="btn btn-success btn-xs">校园</button>
+                                                        <button type="button" class="btn btn-success btn-xs">喜剧</button>
+                                                        <button type="button" class="btn btn-success btn-xs">感人</button>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div>简短评论:</div>
+                                                    <input type="text" class="p">
+                                                </div>
+                                                <div class="modal-body">
+                                                    <el-checkbox v-model="checked">仅自己可见</el-checkbox>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <span class="share">
+                                                    <span>分享到</span>
+                                                    <el-checkbox v-model="check1">豆瓣广播</el-checkbox>
+                                                </span>
+                                                <button data-dismiss="modal" class="btn btn-default" @click="seen">保存</button>
+                                                <!-- <button data-dismiss="modal" class="btn btn-danger">关闭</button> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </li>
+                            <!-- 写影评 -->
                             <li> 
                                 <img src="https://img3.doubanio.com/f/shire/5bbf02b7b5ec12b23e214a580b6f9e481108488c/pics/add-review.gif" />&nbsp;
-                                <a onclick="moreurl(this, {from:'mv_sbj_wr_rv_login'})" class="j a_show_login" href="https://www.douban.com/register?reason=review" rel="nofollow">写影评</a>
+                                <a class="write">写影评</a>
                             </li>
                         </ul>
                         <el-col :span="12" class="fenxiang">
@@ -335,6 +533,56 @@
                             </li>
                         </ul>
                     </div>
+                    <!-- 初恋这件小事的短评 -->
+                    <div>
+                        <span class="title1">初恋这件小事的短评· · · · · </span>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:;">热门</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="javascript:;">最新</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="javascript:;">好友</a>
+                            </li>
+                        </ul>
+                        <div  v-for="(data,i) of dates" :key="i" :data-index="i" class="main">
+                            <!-- 基本信息 -->
+                            <div class="main-hd">
+                                <!-- 用户昵称 -->
+                                <a href="" class="name1">{{data.uname}}</a>
+                                <!-- 评分 -->
+                                <span title="力荐" >
+                                    <el-rate v-model="value" disabled  text-color="#ff9900" score-template="{value}">
+                                    </el-rate>
+                                </span>
+                                <!-- 评论时间 -->
+                                <span class="main-meta">{{data.ptime}}</span>
+                                <!-- 有用 -->
+                                <div class="main-good">
+                                    <span>{{data.zan}}</span>
+                                    <span @click="addyy" :data-i="i">有用</span>
+                                </div>
+                                
+                            </div>
+                            <!-- 评论内容 -->
+                            <div  class="main-bd">
+                                <p class="spoiler-tip" v-for="(txt,i) of data.msg" :key="i">
+                                    {{txt}}
+                                </p> 
+                            </div>
+
+
+                        </div>
+
+
+
+
+
+
+                            
+                    </div>
 
 
 
@@ -342,41 +590,17 @@
 
 
 
-<!-- 测试 -->
-<el-row>
-<el-button type="text"  @click="dialogFormVisible = true">
-        <el-button type="danger" size="mini" plain>想看</el-button>
-</el-button>
-</el-row>
-
-<el-dialog title="添加收藏：写短评" :visible.sync="dialogFormVisible">
-  <el-form :model="form">
-    <el-form-item label="标签(多个标签用空格分隔):" :label-width="formLabelWidth">
-      <el-input v-model="form.name" autocomplete="off"></el-input>
-    </el-form-item>
-    <div>
-        <span>常用标签：</span> 
-        <el-tag type="success">初恋</el-tag>
-        <el-tag type="success">2010</el-tag>
-        <el-tag type="success">少年</el-tag>
-        <el-tag type="success">成长</el-tag>
-        <el-tag type="success">校园</el-tag>
-        <el-tag type="success">青春</el-tag>
-        <el-tag type="success">爱情</el-tag>
-        <el-tag type="success">泰国</el-tag>
-        <el-tag type="success">喜剧</el-tag>
-        <el-tag type="success">感人</el-tag>
-    </div>
-    <el-form-item label="简短评论:" :label-width="formLabelWidth">
-      <el-input v-model="form.name" autocomplete="off"></el-input>
-    </el-form-item>
 
 
-  </el-form>
-  <div slot="footer" class="dialog-footer">
-    <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
-  </div>
-</el-dialog>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -393,29 +617,198 @@ export default {
       return {
         value: 4,
         value2: null,
-
-
-
-// 测试  看过
-dialogTableVisible: false,
+        checked: false,  //想看  仅自己可见 多选框
+        check1: true,  //默认选择  豆瓣广播
+        a:"",
+        b:"",
+        read:true,
+        readAll:false,
+        readAll2:false,
+        // 测试  看过
+        dialogTableVisible: false,
         dialogFormVisible: false,
         form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
+        name: '',
+        region: '',
+        date1: '',
+        date2: '',
+        delivery: false,
+        type: [],
+        resource: '',
+        desc: ''
         },
-        formLabelWidth: '120px'
+        formLabelWidth: '120px',
+        dates:[
+            {
+            mname:"初恋这件小事",
+            src:"https://img3.doubanio.com/view/photo/s_ratio_poster/public/p1505312273.webp",
+            uname:"男神的炎迪迪",
+            utuo:"https://img3.doubanio.com/icon/u132758789-6.jpg",
+            value:4,
+            zan:1514,
+            ptime:"2018-08-15 10:30:04",
+            title:"深藏于心的那份青涩",
+            msg:[
+                "生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力"
+            ],
+            msgnew:[
+                "asdffffffffff生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力， 其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会把它再刷一遍，遍遍的感触都不同，就像那个她永远在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透",
+                "生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力， 其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会把它再刷一遍，遍遍的感触都不同，就像那个她永远在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透那个她永远在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透",
+            ],
+            },
+            {
+            mname:"让子弹飞",
+            src:"https://img3.doubanio.com/view/photo/s_ratio_poster/public/p1505312273.webp",
+            uname:"灰灰",
+            utuo:"https://img3.doubanio.com/icon/u132758789-6.jpg",
+            value:2,
+            zan:856,
+            ptime:"2018-08-15 10:30:04",
+            title:"雷锋一直吹",
+            msg:[
+                "火锅真好吃"
+            ],
+            msgnew:[
+                "生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力， 其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会把它再刷一遍，遍遍的感触都不同，就像那个她永远在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透",
+                "生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力， 其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透"
+            ],
+            },
+            {
+            mname:"哪吒",
+            src:"https://img3.doubanio.com/view/photo/s_ratio_poster/public/p1505312273.webp",
+            uname:"当当",
+            utuo:"https://img3.doubanio.com/icon/u132758789-6.jpg",
+            value:2,
+            zan:8885,
+            ptime:"2018-08-15 10:30:04",
+            title:"青藏高原",
+            msg:[
+                "中国动画牛逼了"
+            ],
+            msgnew:[
+                "生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力， 其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会把它再刷一遍，遍遍的感触都不同，就像那个她永远在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透",
+                "生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力， 其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透"
+            ],
+            },
+            {
+            mname:"大鱼海棠",
+            src:"https://img3.doubanio.com/view/photo/s_ratio_poster/public/p1505312273.webp",
+            uname:"灰灰",
+            utuo:"https://img3.doubanio.com/icon/u132758789-6.jpg",
+            value:2,
+            zan:6514,
+            ptime:"2018-08-15 10:30:04",
+            title:"一直哔哔哔",
+            msg:[
+                "无法超越"
+            ],
+            msgnew:[
+                "生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力， 其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会把它再刷一遍，遍遍的感触都不同，就像那个她永远在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透",
+                "生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力， 其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会在我心裡，但却越来越模糊。 sdsssssssss这篇影评可能有剧透"
+            ],
+            }
+        ]
+
+
+
+
+
+
+
+
 
 
       }
+
+
+    },
+    methods:{
+        msg(e){
+            if(e.target.nodeName==="BUTTON"){
+                this.a += e.target.innerHTML+" " ;
+            }
+        },
+        msg2(e){
+            if(e.target.nodeName==="BUTTON"){
+                this.b += e.target.innerHTML+" " ;
+            }
+        },
+        clear1(){
+            this.a = "";
+        },
+        clear2(){
+            this.b = "";
+        },
+        seen(){
+            this.read = false;
+            this.readAll = true;
+            this.readAll2 = false;
+            this.a = "";
+        },
+        seen2(){
+            this.read = false;
+            this.readAll = false;
+            this.readAll2 = true;
+            this.b = "";
+        },
+        open() {
+        this.$confirm('此操作将删除, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+          this.read = true;
+          this.readAll = false;
+          this.readAll2 = false;
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });          
+        });
+        },
+        open2() {
+            this.$confirm('此操作将删除, 是否继续?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+            }).then(() => {
+            this.$message({
+                type: 'success',
+                message: '删除成功!'
+            });
+            this.read = true;
+            this.readAll = false;
+            this.readAll2 = false;
+            }).catch(() => {
+            this.$message({
+                type: 'info',
+                message: '已取消删除'
+            });          
+            });
+        },
+        addyy(e){
+            var i=e.target.dataset.i;            
+            // 如果赞已经加一
+            // 那么就弹框不能再加了
+            if(this.dates[i].zan<this.dates[i].zan+1){
+               this.dates[i].zan++;
+            }else{
+                 alert("这条短评你已经投过票了");
+            }
+                
+            
+        }
+        
     }
   }    
 </script>
+
+
 <style scoped>
 .container{
     width: 820px;
@@ -492,6 +885,9 @@ div .el-row{
     margin-left: 10px; 
 }
 a{font-size: 12px;}
+.gtleft{
+    margin-top: 10px;
+}
 .gtleft>ul>li{
     display: inline-block;
     margin: 5px;
@@ -503,7 +899,8 @@ span.el-dropdown-link{
     font-size: 12px;
 }
 .jqjj{
-    margin-top: 21px;
+    float: left;
+    margin-top: 10px;
     margin-bottom: 20px;
     font-size: 15px;
 }
@@ -553,12 +950,132 @@ span.el-dropdown-link{
     height: 115px;
 }
 
+.share{
+    float: left;
+    line-height: 40px;
+    color: #606266;
+    font-size: 14px;
+}
+.share span{
+    margin-right: 10px; 
+}
+.btn-danger{
+    float: left;
+    margin-right: 10px;
+    background-color: #fef0f0;
+    color: #000;
+    border: 1px solid #fbc4c4;
+}
+.modal-header h4{
+    font-size: 16px;
+    margin: 0px;
+}
+.modal-header{
+    padding: 12px 18px;
+    background-color:#ebf5ea;
+    color:#007722;
+    font-size: 13px;
+}
+.modal-header .close{
+    margin-top: -20px;
+}
+.modal-body{
+    padding: 10px;
+    margin-bottom: 5px;
+}
+.modal-body input{
+    width: 350px;
+    height: 30px;
+    margin-top: 5px;
+}
+.btn-success{
+    background-color:#ebf5ea;
+    border: 1px solid #bed8bc;
+    color:#007722;
+    margin-right: 5px;
+}
+.modal-body .p{
+    width: 100%
+}
+.modal-footer{
+    padding: 10px 18px 0 18px;
+    margin-top: 5px;
+    background: #e9eef2;
+}
+.a_stars{
+    margin-top: 5px;
+}
+.write{
+    cursor: pointer;
+}
+.modal-dialog{
+    margin:  300px auto;
+}
+/* 面包屑导航 */
+.breadcrumb-item a:hover{
+    background: #37a;
+    color: #fff;
+} 
+.breadcrumb-item a:active{
+    background: #fff;
+    color: #000;
+} 
 
 
 
+/* 初恋这件小事的短评 */
+.name1{
+  font-size: 13px;
+  font-weight: normal
+}
+.name1:visited {
+  cursor: pointer;
+  color: #666699;
+  margin-left:10px;
+}
+.name1:hover{
+  background: #37a;  
+  color:azure;
+  cursor: pointer;
+}
+.name1:active{
+  background: #ffac2d;  
+  color:azure;
+  cursor: pointer;
+}
+.breadcrumb{
+    padding: 8px 0;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+.main{
+    border-top: 1px solid #ccc;
+    padding: 20px 0 20px 0; 
+    position: relative;
+}
 
+.main-hd{
+  display: inline-block;
+  margin-bottom: 5px;
+}
 
-
+/* 短评评分 */
+.main-hd span .el-rate{
+    margin: 0;
+}
+.main-good{
+    position: absolute;
+    margin-top: -20px; 
+    margin-left: 700px;
+}
+.main-good span:nth-child(2){
+    cursor: pointer;
+}
+.main-good span:nth-child(2):hover{
+    background-color: #215cca;
+    color:#fff;
+}
+/* end */
 
 </style>
 
@@ -576,6 +1093,7 @@ span.el-dropdown-link{
 }
 .fenxiang{
     position: relative;
+    margin-top: -7px;
 }
 .el-dropdown-menu{
     position: absolute;
@@ -602,9 +1120,21 @@ span.el-dropdown-link{
    margin:0 !important; 
    
 }
-
-
-
-
-
+.el-checkbox{
+    float: right;
+}
+.el-checkbox__label{
+    color: #606266 !important;
+}
+.el-checkbox__inner{
+    border-color: #aaa !important;
+}
+.el-button.el-button--light.el-button--mini{
+    font-size:15px;
+}
+.el-dialog{
+    margin: auto;
+    width: 616px;
+}
+/* end */
 </style>
