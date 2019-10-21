@@ -12,7 +12,7 @@
       </ul>
     </div>
     <!-- 第二部分 -->
-    <div v-for="(item, index) of dates" :key="index" class="main-reviem-item">
+    <div v-for="(item, i) of dates" :key="i" class="main-reviem-item">
     <!-- 图片 -->
       <a class="subject-img" href="">                
         <img  :title="item.mname" :src="item.src">
@@ -66,20 +66,61 @@
        
             <!-- 底部按钮 -->
             <div class="cindex-action">
-              <a href="javascript:;" @click="btnup()" class="action-btn"  title="有用">
+              <a href="javascript:;" class="action-btn"  title="有用">
                   <img src="https://img3.doubanio.com/f/zerkalo/536fd337139250b5fb3cf9e79cb65c6193f8b20b/pics/up.png">
-                  <span >{{n}}</span>
+                  <span  @click="btnup" :data-i="i">{{item.zan}}</span>
               </a>
-              <a href="javascript:;" class="action-btn" title="没用" @click="btndown()">
+              <a href="javascript:;" class="action-btn" title="没用" >
                   <img src="https://img3.doubanio.com/f/zerkalo/68849027911140623cf338c9845893c4566db851/pics/down.png">
-                  <span> {{nc}} </span>
+                  <span @click="btndown" :data-i="i">{{item.cai}} </span>
               </a>
               <a href="javascript:;" class="cindex-reply">47回应</a>
             </div>  
         </div>           
           </div>
           <div class="clear"></div>                
-      </div>      
+      </div>   
+         <div class="block">
+           <!-- <span>s</span> -->
+  <ul class="pagination">
+        <li class="page-item disabled">
+            <a class="page-link" href="">上一页</a>
+        </li>
+        <li class="page-item active">
+            <a class="page-link" href="">1</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="http://localhost:8080/#/page2">2</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="">3</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="">4</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="">5</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="">6</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="">7</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="">8</a>
+        </li>
+       <li class="page-item">
+            <a class="page-link" href="">9</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="">10</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="">下一页</a>
+        </li>
+    </ul>
+</div>
     </div>
 </template>
 <script>
@@ -97,10 +138,50 @@ export default {
           utuo:"https://img3.doubanio.com/icon/u132758789-6.jpg",
           ptime:"2018-08-15 10:30:04",
           title:"深藏于心的那份青涩",
+          zan:145,
+          cai:45,
           msgtext:
             '学长他就像我生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力，其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会把它再刷一遍，遍遍的感触都不同，就像那个她永远在我心裡，但却越来越模糊。校园+淡淡初恋+死党哥们阋牆+闺密吃醋吵架闹彆扭+成长后回忆的淡淡哀伤与遗憾大致上总结故事在惯有的校园学长学妹暗恋开始，小水喜欢同校的那个转学生学长阿亮，她爱偷偷在角落看著他踢足球，为了他去选军乐队指挥，参与话剧演出，去报名舞蹈社团，那麽努力的改变自己只为君，中间参杂的学长阿拓闯入让阿亮忍痛退出，其实我们的记忆中或许也曾经历这样的事情，就像歌神张学友与郑中基唱的那首左右为难，一边是友情一边是爱情，如果是您，该怎麽选?  阿亮选了默默退出成全好基友与小水，这是一种属于男人间的友谊。',
             isExpand: false
         },       
+        {
+          mname:"初恋这件小事",
+          src:"https://img3.doubanio.com/view/photo/s_ratio_poster/public/p1505312273.webp",
+          uname:"男神的炎迪迪",
+          utuo:"https://img3.doubanio.com/icon/u132758789-6.jpg",
+          ptime:"2018-08-15 10:30:04",
+          title:"深藏于心的那份青涩",
+          zan:145,
+          cai:45,
+          msgtext:
+            '学长他就像我生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力，其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会把它再刷一遍，遍遍的感触都不同，就像那个她永远在我心裡，但却越来越模糊。校园+淡淡初恋+死党哥们阋牆+闺密吃醋吵架闹彆扭+成长后回忆的淡淡哀伤与遗憾大致上总结故事在惯有的校园学长学妹暗恋开始，小水喜欢同校的那个转学生学长阿亮，她爱偷偷在角落看著他踢足球，为了他去选军乐队指挥，参与话剧演出，去报名舞蹈社团，那麽努力的改变自己只为君，中间参杂的学长阿拓闯入让阿亮忍痛退出，其实我们的记忆中或许也曾经历这样的事情，就像歌神张学友与郑中基唱的那首左右为难，一边是友情一边是爱情，如果是您，该怎麽选?  阿亮选了默默退出成全好基友与小水，这是一种属于男人间的友谊。',
+            isExpand: false
+        },       
+         
+        {
+          mname:"初恋这件小事",
+          src:"https://img3.doubanio.com/view/photo/s_ratio_poster/public/p1505312273.webp",
+          uname:"男神的炎迪迪",
+          utuo:"https://img3.doubanio.com/icon/u132758789-6.jpg",
+          ptime:"2018-08-15 10:30:04",
+          title:"深藏于心的那份青涩",
+          msgtext:
+            '学长他就像我生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力，其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会把它再刷一遍，遍遍的感触都不同，就像那个她永远在我心裡，但却越来越模糊。校园+淡淡初恋+死党哥们阋牆+闺密吃醋吵架闹彆扭+成长后回忆的淡淡哀伤与遗憾大致上总结故事在惯有的校园学长学妹暗恋开始，小水喜欢同校的那个转学生学长阿亮，她爱偷偷在角落看著他踢足球，为了他去选军乐队指挥，参与话剧演出，去报名舞蹈社团，那麽努力的改变自己只为君，中间参杂的学长阿拓闯入让阿亮忍痛退出，其实我们的记忆中或许也曾经历这样的事情，就像歌神张学友与郑中基唱的那首左右为难，一边是友情一边是爱情，如果是您，该怎麽选?  阿亮选了默默退出成全好基友与小水，这是一种属于男人间的友谊。',
+            isExpand: false
+        },       
+         
+        {
+          mname:"初恋这件小事",
+          src:"https://img3.doubanio.com/view/photo/s_ratio_poster/public/p1505312273.webp",
+          uname:"男神的炎迪迪",
+          utuo:"https://img3.doubanio.com/icon/u132758789-6.jpg",
+          ptime:"2018-08-15 10:30:04",
+          title:"深藏于心的那份青涩",
+          msgtext:
+            '学长他就像我生命中的灵感，他让我了解爱的积极意义，他就像是让我一直前进的动力，其实这部在内地12年上映的泰国校园爱情小清新电影，每次想到学生时期的那份纯纯爱恋，总是会把它再刷一遍，遍遍的感触都不同，就像那个她永远在我心裡，但却越来越模糊。校园+淡淡初恋+死党哥们阋牆+闺密吃醋吵架闹彆扭+成长后回忆的淡淡哀伤与遗憾大致上总结故事在惯有的校园学长学妹暗恋开始，小水喜欢同校的那个转学生学长阿亮，她爱偷偷在角落看著他踢足球，为了他去选军乐队指挥，参与话剧演出，去报名舞蹈社团，那麽努力的改变自己只为君，中间参杂的学长阿拓闯入让阿亮忍痛退出，其实我们的记忆中或许也曾经历这样的事情，就像歌神张学友与郑中基唱的那首左右为难，一边是友情一边是爱情，如果是您，该怎麽选?  阿亮选了默默退出成全好基友与小水，这是一种属于男人间的友谊。',
+            isExpand: false
+        },       
+         
         {
           mname:"初恋这件小事",
           src:"https://img3.doubanio.com/view/photo/s_ratio_poster/public/p1505312273.webp",
@@ -117,11 +198,16 @@ export default {
     }
   },
   methods:{
-     btnup:function(){
-     this.n++
-    },
-     btndown:function(){
-     this.nc--
+     btnup(e){
+       var i=e.target.dataset.i;
+      //  var btnadd=e.target.parentNode
+      
+         this.dates[i].zan++
+     },
+
+     btndown(e){
+      var i=e.target.dataset.i;
+      this.dates[i].cai++
     },
     toggleUp(item, e){
       var target = e.target.parentNode;//点击后获取当前评论
@@ -139,7 +225,6 @@ export default {
           target.style.height = "5.65rem";//收起状态的容器高度
           //收起状态的高度
           
-
         }
       }
     },
@@ -158,7 +243,6 @@ export default {
   }
 </script>
 <style scoped>
-
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }
@@ -303,7 +387,6 @@ export default {
   margin-right: 4px;
   border-radius: 2px;
   background-color: #f0f7f9;
-
 }
 .cindex-reply {
   margin-left: 10px;
@@ -337,7 +420,6 @@ export default {
 .cindex-newpage h2{
  margin-top:-2px
 } */
-
 .main-author{
   color: #aaaaaa;
   margin-top:20px;
@@ -361,7 +443,6 @@ export default {
   height: 33px;
   margin-right:20px;
   border:1px solid #a4d0a1;
-
 }
 .useless_count{
   cursor: auto;
@@ -375,7 +456,6 @@ export default {
   height: 33px;
   margin-right:20px;
   border:1px solid #a4d0a1;
-
 }
 .useful_count img{
   width: 14px;
@@ -396,13 +476,22 @@ export default {
   color: #fff;
   cursor: pointer;
 }
-
+.pagination{
+  float:right;
+  margin-top:0px;
+}
+.page-link{
+  padding: 4px 8px;
+}
 </style>
 
 
 
 
 <style>
+.el-pagination{
+ margin-left:212px !important;
+}
   .el-rate {
     height: 24px;
   }
