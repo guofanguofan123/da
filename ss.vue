@@ -78,6 +78,7 @@
             </div>  
         </div>           
           </div>
+          <div>{{info}}</div>
           <div class="clear"></div>                
       </div>   
          <div class="block">
@@ -130,6 +131,7 @@ export default {
       value:3.5,
       n:134,
       nc:20,
+      info:null,
       dates:[
         {
           mname:"初恋这件小事",
@@ -225,18 +227,21 @@ export default {
         }
       }
     },
-     created(){
-       console.log(1)
-       this.$axios.get(
-         "/cindex"
-       )
-       .then(result=>{
-         console.log(result.data);
-       })
-       .catch(err=>{
-         console.log(err)
-       })
-     },
+    created:function (){
+      console.log(1)
+    this.$axios.get('http://api.douban.com/v2/movie/in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a&start=0&count=10')
+      //成功返回
+      .then(response=>{
+         console.log(response);
+      })
+      //失败返回
+      .catch(error=>{
+          console.log(error);
+      })
+ },
+     
+
+
     filters: {
       explainLen: function (item) {
         if (!item.msgtext) return;

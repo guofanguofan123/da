@@ -3,9 +3,9 @@
     <div class="movies">{{msg}}</div>
 <!--分类部分-->
     <div class="list">
-      <ul class="ul-form">
-        <li v-for="(item,i) of list1" :key="i">
-          <a href="#">{{item}}</a>
+      <ul class="ul-form" @click="aa">
+        <li v-for="(item,i) of list1" :key="i" >
+          <a href="javascript:;"  :data-i="i" :class="{my_click:isClick}">{{item}}</a>
         </li>
       </ul>
       <ul class="ul-type">
@@ -61,7 +61,8 @@
 <script>
   export default{
     data(){
-      return{       
+      return{   
+        isClick:false,    
         msg:"选影视",
         msg1:"近期热门",
         msg2:"标记最多",
@@ -98,10 +99,21 @@
           {score:9.6,img:require("../image/bawang.jpg"),mname:"霸王别姬"},
         ],
       }
+    },
+    methods:{
+      aa(e){
+        if(e.target.nodeName=="A"){
+          console.log(666)
+          var i=e.target.dataset.i;
+          this.isClick=true;
+          console.log(this.isClick);
+        }
+      }
     }
   }
 </script>
 <style scoped>
+  .my_click{background:#258dcd;color:white !important; padding:0 15px;}
   .container{width:820px;margin:0 auto;}
   .movies{font-size:26px;color:#333;font-weight:bold;margin-top:58px;  margin-bottom:25px;}
   .list{height:235px;}
@@ -117,8 +129,8 @@
   .checkbox .span3{display:inline-block;padding-left:25px;}
   .checkbox .span2{display:inline-block;padding-right:25px;}
   /*图片部分*/  
-  .photo-container{width:820px;display:flex;clear:left;flex-wrap:wrap;}
-  .photo-div{width:138px;height:190px;margin-right:26px;margin-bottom:48px;justify-content:space-between;}
+  .photo-container{width:820px;display:flex;clear:left;flex-wrap:wrap;justify-content:space-between;}
+  .photo-div{width:138px;height:190px;margin-right:26px;margin-bottom:45px;}
   .photo-div img{width:100%;height:100%;}
   .score{font-size:13px;color:#ffac2d;}
   .mname{font-size:13px;color:#333;}
